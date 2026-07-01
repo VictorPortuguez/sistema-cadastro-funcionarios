@@ -1,0 +1,15 @@
+1;Gustavo;2500.00
+2;Gabriela;1850.50
+3;Mario;4200.00
+4;Marcos;3100.75
+5;Fernanda;2800.00
+6;Juliana;3900.25
+7;Carlos;2150.00
+8;Patricia;4500.00
+9;Ricardo;2750.80
+10;Amanda;3300.00
+11;Roberto;5100.50
+12;Camila;2950.00
+13;Lucas;2400.00
+14;Beatriz;3600.90
+15;Gabriel;4100.00
