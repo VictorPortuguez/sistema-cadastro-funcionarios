@@ -140,10 +140,13 @@ void listar(){
 
 void buscar(){
     
-    int idProcurado = 0;
+    int op = 0;
     
-    printf("Digite o Id do funcionario\n");
-    scanf("%d", &idProcurado);
+    printf("Qual metodo de Busca?\n");
+    printf("1 - ID\n");
+    printf("2 - Nome\n");
+    printf("Escolha 1 opcao\n");
+    scanf("%d", &op);
     getchar();
 
     FILE *arq;
@@ -153,26 +156,66 @@ void buscar(){
         return;
     }
 
-    char linha[100];
     int id;
+    int encontrado = 0;
+    char linha[100];
     char nome[50];
     float salario;
-    int encontrado = 0;
-            
-    while(fgets(linha, sizeof(linha), arq) != NULL){
-                
-        sscanf(linha, "%d;%[^;];%f", &id, nome, &salario);
+
+    switch(op){
+        case 1:{
+
+            int idProcurado;
         
-        if(idProcurado == id){
-            printf("%d\n", id);
-            printf("%s\n", nome);
-            printf("%.2f\n\n", salario);   
-            encontrado = 1;
+            printf("Digite o Id do Funcionario\n");
+            scanf("%d", &idProcurado);
+            getchar();
+            
+            while(fgets(linha, sizeof(linha), arq) != NULL){
+                    
+                sscanf(linha, "%d;%[^;];%f", &id, nome, &salario);
+            
+                if(idProcurado == id){
+                    printf("ID: %d\n", id);
+                    printf("Nome: %s\n", nome);
+                    printf("Salario: %.2f\n\n", salario);   
+                    encontrado = 1;
+                }
+            }
+            if(encontrado == 0){
+                printf("ID NAO ENCONTRADO\n\n");
+            }
+            break;
+        }
+        case 2:{
+
+            char nomeProcurado[50];
+
+            printf("Digite o nome do Funcionario\n");
+            fgets(nomeProcurado, 50, stdin);
+            nomeProcurado[strcspn(nomeProcurado,"\n")] = '\0';
+
+            while(fgets(linha, sizeof(linha), arq) != NULL){
+                sscanf(linha, "%d;%[^;];%f", &id, nome, &salario);
+
+                if(strcmp(nomeProcurado, nome) == 0){
+                    printf("ID: %d\n", id);
+                    printf("Nome: %s\n", nome);
+                    printf("Salario: %.2f\n\n", salario);   
+                    encontrado = 1;
+                }
+            }
+            if(encontrado == 0){
+                printf("NOME NAO ENCONTRADO\n\n");
+            }
+            
+            break;
+        }
+        default:{
+            printf("Opcao invalida\n");
         }
     }
-    if(encontrado == 0){
-        printf("ID NAO ENCONTRADO\n\n");
-    }
+    fclose(arq);
     
 }
 
